@@ -1,19 +1,35 @@
 import { useState } from "react";
-import type { Contacto } from "../../types";
-import axios from "axios";
+import type { Contacto, ArgumentoContacto } from "../../types";
 
-const ContactoCard = ({
+interface Prop extends Contacto {
+  editarContacto: (id: string, data: ArgumentoContacto) => void;
+  borrarContacto: (id: string) => void;
+}
+
+const ContactoCard: React.FC<Prop> = ({
   _id,
   nombre,
   apellido,
   provincia,
   telefono,
-}: Contacto) => {
+  editarContacto,
+  borrarContacto,
+}) => {
   const [esEditable, setEsEditable] = useState(false);
   const [nombreInput, setNombreInput] = useState<string>(nombre);
   const [apellidoInput, setApellidoInput] = useState<string>(apellido);
   const [provinciaInput, setProvinciaInput] = useState<string>(provincia);
-  const [telefonoInput, setTelefonoInput] = useState<number | string>(telefono);
+  const [telefonoInput, setTelefonoInput] = useState<number>(telefono);
+
+  const handleEditar = () => {
+    editarContacto(_id, {
+      nombre: nombreInput,
+      apellido: apellidoInput,
+      provincia: provinciaInput,
+      telefono: telefonoInput,
+    });
+    setEsEditable(false);
+  };
 
   const cancelarEdit = () => {
     setEsEditable(false);
@@ -21,26 +37,6 @@ const ContactoCard = ({
     setApellidoInput(apellido);
     setProvinciaInput(provincia);
     setTelefonoInput(telefono);
-  };
-
-  const editarContacto = async () => {
-    const editarContactoResp = await axios.put(
-      `http://localhost:8000/contactos/editar/${_id}`,
-      {
-        nombre: nombreInput,
-        apellido: apellidoInput,
-        provincia: provinciaInput,
-        telefono: telefonoInput,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (editarContactoResp.status === 200) {
-      alert(editarContactoResp.data.message);
-    }
   };
 
   return (
@@ -92,7 +88,7 @@ const ContactoCard = ({
               type="number"
               className="ring-1 pl-2 ring-white/70  rounded"
               value={telefonoInput}
-              onChange={({ target }) => setTelefonoInput(target.value)}
+              onChange={({ target }) => setTelefonoInput(Number(target.value))}
             />
           ) : (
             <p className="pl-2">{telefono}</p>
@@ -110,7 +106,7 @@ const ContactoCard = ({
             </button>
             <button
               className="px-4 py-1 rounded bg-red-500 text-white font-medium hover:bg-red-600"
-              onClick={() => setEsEditable(true)}
+              onClick={() => borrarContacto(_id)}
             >
               Borrar
             </button>
@@ -120,7 +116,7 @@ const ContactoCard = ({
           <div className="flex gap-2">
             <button
               className="px-4 py-1 rounded bg-green-500 text-white font-medium hover:bg-green-600"
-              onClick={editarContacto}
+              onClick={handleEditar}
             >
               Guardar
             </button>

@@ -5,3 +5,10 @@ export interface Contacto {
   provincia: string;
   telefono: number;
 }
+
+export interface ArgumentoContacto {
+  nombre: string;
+  apellido: string;
+  provincia: string;
+  telefono: number;
+}

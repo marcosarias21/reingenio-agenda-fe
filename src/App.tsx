@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ModalCrearContacto } from "./components/ModalCrearContacto";
 import axios from "axios";
 import { ContactoCard } from "./components/ContactoCard";
-import type { Contacto } from "./types";
+import type { Contacto, ArgumentoContacto } from "./types";
 import "./App.css";
 
 const App = () => {
@@ -13,6 +13,32 @@ const App = () => {
       "http://localhost:8000/contactos"
     );
     setContactos(contactosResponse.data.contactos);
+  };
+
+  const editarContacto = async (id: string, data: ArgumentoContacto) => {
+    const editarContactoResp = await axios.put(
+      `http://localhost:8000/contactos/editar/${id}`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (editarContactoResp.status === 200) {
+      alert(editarContactoResp.data.message);
+      obtenerContactos();
+    }
+  };
+
+  const borrarContacto = async (id: string) => {
+    const contactoBorradoResp = await axios.delete(
+      `http://localhost:8000/contactos/borrar/${id}`
+    );
+    if (contactoBorradoResp.status === 200) {
+      alert("Se borro el contacto");
+      obtenerContactos();
+    }
   };
 
   useEffect(() => {
@@ -35,7 +61,12 @@ const App = () => {
           </div>
         )}
         {contactos.map((contacto) => (
-          <ContactoCard {...contacto} />
+          <ContactoCard
+            key={contacto._id}
+            {...contacto}
+            editarContacto={editarContacto}
+            borrarContacto={borrarContacto}
+          />
         ))}
       </div>
     </div>
