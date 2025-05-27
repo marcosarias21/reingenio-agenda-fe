@@ -4,10 +4,6 @@ export default {
   overrides: [
     {
       files: ["*.tsx", "*.jsx", "*.ts", "*.js"],
-      options: {
-        semi: false,
-        singleQuote: true,
-      },
     },
   ],
 };
