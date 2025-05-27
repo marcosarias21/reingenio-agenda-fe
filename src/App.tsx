@@ -35,8 +35,11 @@ const App = () => {
     const contactoBorradoResp = await axios.delete(
       `http://localhost:8000/contactos/borrar/${id}`
     );
+    console.log(contactoBorradoResp);
     if (contactoBorradoResp.status === 200) {
-      alert("Se borro el contacto");
+      alert(
+        `Se borro el contacto: ${contactoBorradoResp.data.contactoBorrado.nombre} ${contactoBorradoResp.data.contactoBorrado.apellido}`
+      );
       obtenerContactos();
     }
   };
