@@ -7,12 +7,29 @@ import "./App.css";
 
 const App = () => {
   const [contactos, setContactos] = useState<Contacto[]>([]);
+  const [abrirModal, setAbrirModal] = useState<boolean>(false);
 
   const obtenerContactos = async () => {
     const contactosResponse = await axios.get(
       "http://localhost:8000/contactos"
     );
     setContactos(contactosResponse.data.contactos);
+  };
+
+  const crearContacto = async (data: ArgumentoContacto) => {
+    const contactosResponse = await axios.post(
+      "http://localhost:8000/contactos/crear",
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (contactosResponse.status === 200) {
+      alert("Contacto creado");
+      obtenerContactos();
+    }
   };
 
   const editarContacto = async (id: string, data: ArgumentoContacto) => {
@@ -52,15 +69,23 @@ const App = () => {
     <div className="h-dvh flex flex-col items-center gap-20 container mx-auto text-gray-200">
       <div className="flex flex-col mt-10 gap-5">
         <h1 className="text-2xl font-medium">Agenda de Contactos</h1>
-        <button className="border-2 border-gray-400 rounded p-2 text-center font-medium">
+        <button
+          className="border-2 border-gray-400 rounded p-2 text-center font-medium"
+          onClick={() => setAbrirModal(true)}
+        >
           Crear Contacto
         </button>
-        <ModalCrearContacto />
+        {abrirModal && (
+          <ModalCrearContacto
+            onClose={() => setAbrirModal(false)}
+            crearContacto={crearContacto}
+          />
+        )}
       </div>
       <div className="grid grid-cols-4 w-full gap-4 ">
         {!contactos.length && (
           <div className="flex justify-center items-center col-span-12 font-bold">
-            No hay tareas actualmente
+            No hay contactos actualmente
           </div>
         )}
         {contactos.map((contacto) => (

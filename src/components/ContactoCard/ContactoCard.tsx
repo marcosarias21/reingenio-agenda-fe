@@ -40,19 +40,19 @@ const ContactoCard: React.FC<Prop> = ({
   };
 
   return (
-    <div className="border-2 border-white/10 rounded px-4 py-2">
+    <div className="border-2 border-white/10 rounded px-4 py-2 col-span-2">
       <div className="flex flex-col gap-3 mt-2">
-        <div className="flex">
+        <div className="flex items-center">
           <label className="font-medium">Nombre:</label>
           {esEditable ? (
             <input
               type="text"
-              className="ring-1 pl-2 ring-white/70  rounded"
+              className="font-medium px-2 border-b text-sm focus:border-none"
               value={nombreInput}
               onChange={({ target }) => setNombreInput(target.value)}
             />
           ) : (
-            <p className="px-2">{nombre}</p>
+            <p className="font-medium px-2 text-sm">{nombre}</p>
           )}
         </div>
         <div className="flex">
@@ -60,12 +60,12 @@ const ContactoCard: React.FC<Prop> = ({
           {esEditable ? (
             <input
               type="text"
-              className="ring-1 pl-2 ring-white/70  rounded"
+              className="font-medium px-2 border-b text-sm focus:border-none"
               value={apellidoInput}
               onChange={({ target }) => setApellidoInput(target.value)}
             />
           ) : (
-            <p className="pl-2">{apellido}</p>
+            <p className="font-medium px-2 text-sm">{apellido}</p>
           )}
         </div>
         <div className="flex">
@@ -73,12 +73,12 @@ const ContactoCard: React.FC<Prop> = ({
           {esEditable ? (
             <input
               type="text"
-              className="ring-1 pl-2 ring-white/70  rounded"
+              className="font-medium px-2 border-b text-sm focus:border-none"
               value={provinciaInput}
               onChange={({ target }) => setProvinciaInput(target.value)}
             />
           ) : (
-            <p className="pl-2">{provincia}</p>
+            <p className="font-medium px-2 text-sm">{provincia}</p>
           )}
         </div>
         <div className="flex">
@@ -86,12 +86,12 @@ const ContactoCard: React.FC<Prop> = ({
           {esEditable ? (
             <input
               type="number"
-              className="ring-1 pl-2 ring-white/70  rounded"
+              className="font-medium px-2 border-b text-sm focus:border-none"
               value={telefonoInput}
               onChange={({ target }) => setTelefonoInput(Number(target.value))}
             />
           ) : (
-            <p className="pl-2">{telefono}</p>
+            <p className="font-medium px-2 text-sm">{telefono}</p>
           )}
         </div>
       </div>
