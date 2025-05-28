@@ -27,7 +27,7 @@ const App = () => {
       }
     );
     if (contactosResponse.status === 200) {
-      alert("Contacto creado");
+      alert(`${contactosResponse.data.message}`);
       obtenerContactos();
     }
   };
@@ -52,7 +52,6 @@ const App = () => {
     const contactoBorradoResp = await axios.delete(
       `http://localhost:8000/contactos/borrar/${id}`
     );
-    console.log(contactoBorradoResp);
     if (contactoBorradoResp.status === 200) {
       alert(
         `Se borro el contacto: ${contactoBorradoResp.data.contactoBorrado.nombre} ${contactoBorradoResp.data.contactoBorrado.apellido}`
@@ -82,7 +81,7 @@ const App = () => {
           />
         )}
       </div>
-      <div className="grid grid-cols-4 w-full gap-4 ">
+      <div className="grid grid-cols-4 w-full gap-4">
         {!contactos.length && (
           <div className="flex justify-center items-center col-span-12 font-bold">
             No hay contactos actualmente
