@@ -20,6 +20,7 @@ npm install
 npm run dev
 ```
 
+
 ⚙️ **Tecnologías utilizadas:**
 
 React
@@ -31,6 +32,7 @@ Axios
 Vite
 
 Tailwind CSS
+
 
 
 🎯  **Decisiones técnicas**
