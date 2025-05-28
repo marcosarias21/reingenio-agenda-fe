@@ -36,6 +36,7 @@ Tailwind CSS
 
 
 🎯  **Decisiones técnicas**
+
 Decidi no usar React Hook Form ya que al ser una aplicación sencilla, no era necesario incorporar una librería adicional para el manejo de formularios.
 
 Use Axios para simplificar las peticiones HTTP.
