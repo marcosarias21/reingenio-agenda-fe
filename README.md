@@ -21,6 +21,7 @@ npm run dev
 ```
 
 ⚙️ **Tecnologías utilizadas:**
+
 React
 
 TypeScript
