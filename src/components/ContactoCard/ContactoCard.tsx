@@ -40,7 +40,7 @@ const ContactoCard: React.FC<Prop> = ({
   };
 
   return (
-    <div className="border-2 border-white/10 rounded px-4 py-2 col-span-2">
+    <div className="border-2 border-white/10 rounded px-4 py-2 md:col-span-1">
       <div className="flex flex-col gap-3 mt-2">
         <div className="flex items-center">
           <label className="font-medium">Nombre:</label>
@@ -55,7 +55,7 @@ const ContactoCard: React.FC<Prop> = ({
             <p className="font-medium px-2 text-sm">{nombre}</p>
           )}
         </div>
-        <div className="flex">
+        <div className="flex items-center">
           <label className="font-medium">Apellido:</label>
           {esEditable ? (
             <input
@@ -68,7 +68,7 @@ const ContactoCard: React.FC<Prop> = ({
             <p className="font-medium px-2 text-sm">{apellido}</p>
           )}
         </div>
-        <div className="flex">
+        <div className="flex items-center">
           <label className="font-medium">Provincia:</label>
           {esEditable ? (
             <input
@@ -81,7 +81,7 @@ const ContactoCard: React.FC<Prop> = ({
             <p className="font-medium px-2 text-sm">{provincia}</p>
           )}
         </div>
-        <div className="flex">
+        <div className="flex items-center">
           <label className="font-medium">Telefono:</label>
           {esEditable ? (
             <input
